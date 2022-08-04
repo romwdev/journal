@@ -4,9 +4,9 @@ const app = express();
 app.use(express.static('dist'));
 app.use(express.json());
 
-// app.get('/', (req, res) => {
-//     res.sendStatus(200);
-// })
+app.get('/users', (req, res) => {
+    getUsers(req.body);
+})
 
 const port = 3000;
 
