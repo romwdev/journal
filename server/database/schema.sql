@@ -1,0 +1,10 @@
+DROP DATABASE journal;
+CREATE DATABASE journal;
+
+USE journal;
+
+CREATE TABLE users (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(20),
+  password VARCHAR(20)
+);

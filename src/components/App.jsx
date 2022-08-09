@@ -5,9 +5,11 @@ import axios from 'axios';
 const App = () => {
 
   const getUser = (user) => {
-    axios.get('/users', user)
-      .then(() => {
-
+    axios.get('/users', {
+      params: user
+    })
+      .then((data) => {
+        console.log(data);
       })
       .catch((err) => { console.error(err) })
   }
