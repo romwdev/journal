@@ -5,6 +5,9 @@ USE journal;
 
 CREATE TABLE users (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  username VARCHAR(20),
+  firstName VARCHAR(20),
+  lastName VARCHAR(20),
+  email VARCHAR(30) UNIQUE,
+  username VARCHAR(20) UNIQUE,
   password VARCHAR(20)
 );

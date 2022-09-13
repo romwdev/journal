@@ -6,8 +6,21 @@ const users = require('./database/users');
 app.use(express.static('dist'));
 app.use(express.json());
 
+app.get ('/allUsers', (req, res) => {
+    users.getAll((err, data) => {
+        if (err) {
+            res.sendStatus(400);
+        } else {
+            res.json(data);
+        }
+
+    })
+})
 app.get('/users', (req, res) => {
-    users.getUsers(req.query, (err, data) => {
+    let basicAuth = Buffer.from(req.headers.authorization.split(' ')[1], 'base64').toString();
+    let username = basicAuth.split(':')[0];
+    let password = basicAuth.split(':')[1];
+    users.getUsers(username, password, (err, data) => {
         if (err) {
             res.sendStatus(400);
         } else res.send(data);
@@ -15,10 +28,17 @@ app.get('/users', (req, res) => {
 });
 
 app.post('/users', (req, res) => {
-    users.createUser(req.body, (err) => {
-        if (err) {
+    let basicAuth = Buffer.from(req.headers.authorization.split(' ')[1], 'base64').toString();
+    let username = basicAuth.split(':')[0];
+    let password = basicAuth.split(':')[1];
+
+    users.createUser(req.body, username, password, (err, data) => {
+        if (err && err.errno === 1062) {
+            res.send(err);
+        } else if (err) {
             res.sendStatus(400);
         } else res.sendStatus(201);
+
     })
 });
 

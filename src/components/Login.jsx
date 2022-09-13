@@ -8,14 +8,8 @@ const Login = ({ getUser, currentUser, setCurrentUser }) => {
   const [invalid, setInvalid] = useState(false);
 
   const handleSubmit = () => {
-    let user = {
-      username: loginUserName,
-      password: loginPassword,
-    };
-    setLoginUserName("");
-    setLoginPassword("");
 
-    getUser(user, (userArray) => {
+    getUser(loginUserName, loginPassword, (userArray) => {
       if (userArray.length === 0) {
         setInvalid(true);
       } else {
@@ -27,10 +21,10 @@ const Login = ({ getUser, currentUser, setCurrentUser }) => {
   };
 
   const handleSignOut = () => {
-    if (confirm('Are you sure you want to sign out?')) {
-      setCurrentUser('');
+    if (confirm("Are you sure you want to sign out?")) {
+      setCurrentUser("");
     }
-  }
+  };
 
   return (
     <div>
@@ -59,10 +53,6 @@ const Login = ({ getUser, currentUser, setCurrentUser }) => {
                 <button onClick={() => handleSubmit()}>Submit</button>
               </div>
             ) : null}
-          </div>
-
-          <div className="signup">
-            <button>Sign Up</button>
           </div>
         </div>
       )}
