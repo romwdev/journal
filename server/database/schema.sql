@@ -11,3 +11,14 @@ CREATE TABLE users (
   username VARCHAR(20) UNIQUE,
   password VARCHAR(20)
 );
+
+CREATE TABLE journals (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  userId INT NOT NULL,
+  title VARCHAR(30),
+  body TEXT,
+  createdAt DATETIME,
+
+  FOREIGN KEY (userId)
+    REFERENCES users(id)
+)

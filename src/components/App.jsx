@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import Login from "./Login.jsx";
 import Signup from "./Signup.jsx";
+import JournalList from "./JournalList.jsx";
 import axios from "axios";
 
 const App = () => {
@@ -13,8 +14,8 @@ const App = () => {
       .get("/users", {
         auth: {
           username: loginUserName,
-          password: loginPassword
-        }
+          password: loginPassword,
+        },
       })
       .then((results) => {
         callback(results.data);
@@ -52,13 +53,20 @@ const App = () => {
   return (
     <div>
       <h1 className="title">
-        {currentUser ? `${currentUser.firstName.charAt(0).toUpperCase() + currentUser.firstName.slice(1)}'s Journal` : "Journal"}
+        {currentUser
+          ? `${
+              currentUser.firstName.charAt(0).toUpperCase() +
+              currentUser.firstName.slice(1)
+            }'s Journal`
+          : "Journal"}
       </h1>
+      {currentUser ? <JournalList /> : null}
       <Login
         getUser={getUser}
         currentUser={currentUser}
         setCurrentUser={setCurrentUser}
       />
+
       {!currentUser ? (
         <button onClick={() => setSignupClicked(true)}>Sign Up</button>
       ) : null}
