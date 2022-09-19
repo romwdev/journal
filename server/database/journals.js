@@ -1,1 +1,0 @@
-// INSERT INTO journals (body, createdAt, userId) SELECT "Test Body", "2011-12-18 13:17:17", id FROM users WHERE username = "rvtaylor94"

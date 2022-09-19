@@ -1,7 +1,7 @@
 const db = require("./db");
 
 module.exports = {
-  getAll: (callback) => {
+  allUsers: (callback) => {
     db.query("SELECT * FROM users", (err, data) => callback(err, data));
   },
   getUsers: (username, password, callback) => {

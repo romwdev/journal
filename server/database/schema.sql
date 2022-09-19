@@ -12,7 +12,7 @@ CREATE TABLE users (
   password VARCHAR(20)
 );
 
-CREATE TABLE journals (
+CREATE TABLE entries (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   userId INT NOT NULL,
   title VARCHAR(30),
