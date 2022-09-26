@@ -10,6 +10,16 @@ module.exports = {
         })
     },
 
+    getEntries: ({ currentUser }, callback) => {
+        const queryString = `SELECT * FROM entries WHERE userId = (SELECT id FROM users WHERE username = "${currentUser}");`
+
+        console.log('currentUser: ', currentUser);
+
+        db.query(queryString, (err, results) => {
+            callback(err, results);
+        })
+    },
+
     createEntry: (entry, callback) => {
         const queryString = `INSERT INTO entries (title, body, createdAt, userId) SELECT "${entry.title}", "${entry.body}", "${entry.timestamp}", id FROM users WHERE username = "${entry.currentUser}";`;
 

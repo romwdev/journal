@@ -18,7 +18,8 @@ CREATE TABLE entries (
   title VARCHAR(30),
   body TEXT,
   createdAt DATETIME,
-
   FOREIGN KEY (userId)
     REFERENCES users(id)
 )
+
+-- mysql -u root < server/database/schema.sql

@@ -8,6 +8,12 @@ import axios from "axios";
 const App = () => {
   const [currentUser, setCurrentUser] = useState("");
   const [signupClicked, setSignupClicked] = useState(false);
+  const [journalList, setJournalList] = useState([]);
+
+  const updateJournalList = () => {
+    console.log('currentuser: ', currentUser);
+
+  };
 
   const getUser = (loginUserName, loginPassword, callback) => {
     axios
@@ -60,7 +66,7 @@ const App = () => {
             }'s Journal`
           : "Journal"}
       </h1>
-      {currentUser ? <JournalList /> : null}
+      {currentUser ? <JournalList updateJournalList={updateJournalList}/> : null}
       <Login
         getUser={getUser}
         currentUser={currentUser}

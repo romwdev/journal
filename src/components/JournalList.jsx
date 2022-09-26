@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-const JournalList = () => {
+const JournalList = ({ updateJournalList }) => {
 
   return (
     <div>

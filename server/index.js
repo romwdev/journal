@@ -26,7 +26,9 @@ app.get("/users", (req, res) => {
   users.getUsers(username, password, (err, data) => {
     if (err) {
       res.sendStatus(400);
-    } else res.send(data);
+    } else {
+      res.send(data);
+    }
   });
 });
 
@@ -36,7 +38,15 @@ app.get('/allEntries', (req, res) => {
             res.sendStatus(400);
         } else res.send(data);
     })
-})
+});
+// app.get('/entries', (req, res) => {
+//   console.log('req.query: ', req.query);
+//   entries.getEntries(req.query, (err, data) => {
+//     if (err) {
+//       res.sendStatus(400);
+//     } else res.send(data);
+//   })
+// })
 app.post("/users", (req, res) => {
   let basicAuth = Buffer.from(
     req.headers.authorization.split(" ")[1],
@@ -54,7 +64,7 @@ app.post("/users", (req, res) => {
   });
 });
 
-app.post('/createEntry', (req, res) => {
+app.post('/entries', (req, res) => {
     entries.createEntry(req.body, (err, data) => {
         if (err) {
             res.sendStatus(400);
