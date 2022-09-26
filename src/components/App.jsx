@@ -3,17 +3,13 @@ import { useState } from "react";
 import Login from "./Login.jsx";
 import Signup from "./Signup.jsx";
 import JournalList from "./JournalList.jsx";
+import ViewJournal from "./ViewJournal.jsx";
 import axios from "axios";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState("");
+  const [currentEntry, setCurrentEntry] = useState({});
   const [signupClicked, setSignupClicked] = useState(false);
-  const [journalList, setJournalList] = useState([]);
-
-  const updateJournalList = () => {
-    console.log('currentuser: ', currentUser);
-
-  };
 
   const getUser = (loginUserName, loginPassword, callback) => {
     axios
@@ -66,7 +62,14 @@ const App = () => {
             }'s Journal`
           : "Journal"}
       </h1>
-      {currentUser ? <JournalList updateJournalList={updateJournalList}/> : null}
+      {currentUser && !Object.keys(currentEntry).length ? (
+        <JournalList
+          currentUser={currentUser}
+          setCurrentEntry={setCurrentEntry}
+        />
+      ) : currentUser && Object.keys(currentEntry).length ? (
+        <ViewJournal currentEntry={currentEntry} />
+      ) : null}
       <Login
         getUser={getUser}
         currentUser={currentUser}

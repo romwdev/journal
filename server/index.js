@@ -32,21 +32,14 @@ app.get("/users", (req, res) => {
   });
 });
 
-app.get('/allEntries', (req, res) => {
-    entries.allEntries((err, data) => {
-        if (err) {
-            res.sendStatus(400);
-        } else res.send(data);
-    })
+app.get("/allEntries", (req, res) => {
+  entries.allEntries((err, data) => {
+    if (err) {
+      res.sendStatus(400);
+    } else res.send(data);
+  });
 });
-// app.get('/entries', (req, res) => {
-//   console.log('req.query: ', req.query);
-//   entries.getEntries(req.query, (err, data) => {
-//     if (err) {
-//       res.sendStatus(400);
-//     } else res.send(data);
-//   })
-// })
+
 app.post("/users", (req, res) => {
   let basicAuth = Buffer.from(
     req.headers.authorization.split(" ")[1],
@@ -64,13 +57,13 @@ app.post("/users", (req, res) => {
   });
 });
 
-app.post('/entries', (req, res) => {
-    entries.createEntry(req.body, (err, data) => {
-        if (err) {
-            res.sendStatus(400);
-        } else res.sendStatus(201);
-    })
-})
+app.post("/entries", (req, res) => {
+  entries.createEntry(req.body, (err, data) => {
+    if (err) {
+      res.sendStatus(400);
+    } else res.sendStatus(201);
+  });
+});
 
 const port = 3000;
 

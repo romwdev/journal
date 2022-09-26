@@ -1,13 +1,20 @@
 import React from "react";
 import { useState } from "react";
 
-const JournalList = ({ updateJournalList }) => {
-
+const JournalList = ({ currentUser, setCurrentEntry }) => {
   return (
+  <div>
+    {currentUser ?
     <div>
-      <input placeholder="Enter text here..."/>
+      { currentUser.entries.map((entry, i) => (
+        <div key={i} onClick={() => setCurrentEntry(entry)}>
+          {entry.title}
+        </div>
+      ))}
     </div>
+    : null}
+  </div>
   )
-}
+};
 
 export default JournalList;
