@@ -4,12 +4,14 @@ import Login from "./Login.jsx";
 import Signup from "./Signup.jsx";
 import JournalList from "./JournalList.jsx";
 import ViewJournal from "./ViewJournal.jsx";
+import JournalEntry from "./JournalEntry.jsx";
 import axios from "axios";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState("");
   const [currentEntry, setCurrentEntry] = useState({});
   const [signupClicked, setSignupClicked] = useState(false);
+  const [newEntryClicked, setNewEntryClicked] = useState(false);
 
   const getUser = (loginUserName, loginPassword, callback) => {
     axios
@@ -52,6 +54,13 @@ const App = () => {
       </div>
     );
   }
+  if (newEntryClicked) {
+    return (
+      <div>
+        <JournalEntry setNewEntryClicked={setNewEntryClicked}/>
+      </div>
+    )
+  }
   return (
     <div>
       <h1 className="title">
@@ -66,9 +75,13 @@ const App = () => {
         <JournalList
           currentUser={currentUser}
           setCurrentEntry={setCurrentEntry}
+          setNewEntryClicked={setNewEntryClicked}
         />
       ) : currentUser && Object.keys(currentEntry).length ? (
-        <ViewJournal currentEntry={currentEntry} />
+        <ViewJournal
+          currentEntry={currentEntry}
+          setCurrentEntry={setCurrentEntry}
+        />
       ) : null}
       <Login
         getUser={getUser}
