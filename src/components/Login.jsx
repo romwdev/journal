@@ -1,28 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
-const Login = ({ getUser, currentUser, setCurrentUser }) => {
+const Login = ({ currentUser, setCurrentUser, setLogin, invalidLogin }) => {
   const [loginClicked, setLoginClicked] = useState(false);
   const [loginUserName, setLoginUserName] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  const [invalid, setInvalid] = useState(false);
 
   const handleSubmit = () => {
 
-    getUser(loginUserName, loginPassword, (userArray) => {
-      if (userArray.length === 0) {
-        setInvalid(true);
-      } else {
-        setInvalid(false);
-        setCurrentUser(userArray[0]);
-        setLoginClicked(false);
-      }
-    });
+    setLogin({
+      username: loginUserName,
+      password: loginPassword
+    })
+    setLoginUserName('');
+    setLoginPassword('');
+    if (Object.keys(currentUser).length) {
+      setLoginClicked(false);
+    }
   };
 
   const handleSignOut = () => {
     if (confirm("Are you sure you want to sign out?")) {
       setCurrentUser("");
+      setLoginClicked(false);
     }
   };
 
@@ -38,7 +38,7 @@ const Login = ({ getUser, currentUser, setCurrentUser }) => {
             </button>
             {loginClicked ? (
               <div>
-                {invalid ? <div>Invalid username/password!</div> : null}
+                {invalidLogin ? <div>Invalid username/password!</div> : null}
                 <input
                   value={loginUserName}
                   placeholder="Username"
